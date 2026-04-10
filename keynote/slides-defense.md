@@ -1,29 +1,241 @@
 ---
 theme: default
-title: ClawWork — The Task Workbench for OpenClaw
+title: 加固 OpenClaw Agent — 纵深防御
 info: |
-  ## ClawWork
-  A desktop client for OpenClaw, built for parallel work.
+  ## Hardening OpenClaw Agent
+  Defense in Depth — A ClawWork Case Study.
 
   [GitHub](https://github.com/clawwork-ai/ClawWork)
 author: samzong
-keywords: openclaw,desktop,agent,parallel-tasks
+keywords: openclaw,desktop,agent,security,defense-in-depth
 highlighter: shiki
 colorSchema: all
 drawings:
   persist: false
 transition: slide-left
 favicon: /images/clawwork-logo.png
-exportFilename: clawwork-keynote
+exportFilename: clawwork-defense-keynote
 ---
 
-<DeckCoverSlide />
+<DeckCoverDefenseSlide />
 
 ---
 
 # 👋 {{ $t({ en: 'About Me', zh: '关于我', ja: '自己紹介', ko: '소개', fr: 'À propos', de: 'Über mich', es: 'Sobre mí', pt: 'Sobre mim' }) }}
 
 <DeckAboutMeSlide />
+
+---
+
+<div class="cw-grid"></div>
+<div class="glow-orb glow-purple cw-pulse" style="top:-80px; right:30%;"></div>
+<div class="glow-orb glow-cyan cw-pulse" style="bottom:-60px; left:25%;"></div>
+
+<div class="cw-thanks-shell">
+  <h1 class="cw-display-title">
+    <span class="cw-shimmer">{{ $t({ en: 'Why Defense?', zh: '为什么谈安全？', ja: 'なぜ防御？', ko: '왜 방어인가?', fr: 'Pourquoi la défense ?', de: 'Warum Verteidigung?', es: '¿Por qué defensa?', pt: 'Por que defesa?' }) }}</span>
+  </h1>
+  <p class="cw-thanks-copy">{{ $t({ en: 'From "AI that talks" to "AI that acts".', zh: '从"会说话的 AI"到"能干活的 AI"。', ja: '「話す AI」から「働く AI」へ。', ko: '"말하는 AI"에서 "일하는 AI"로.', fr: "De « l'IA qui parle » à « l'IA qui agit ».", de: 'Vom "redenden" zum "handelnden" KI.', es: 'De "IA que habla" a "IA que actúa".', pt: 'De "IA que fala" para "IA que age".' }) }}</p>
+</div>
+
+---
+
+# 🦐 {{ $t({ en: 'What is an Agent?', zh: '什么是龙虾？', ja: 'Agent とは？', ko: 'Agent란?', fr: "Qu'est-ce qu'un Agent ?", de: 'Was ist ein Agent?', es: '¿Qué es un Agent?', pt: 'O que é um Agent?' }) }}
+
+<div class="cw-kicker">{{ $t({ en: 'From "answering" to "executing".', zh: '从"会回答问题"到"可执行任务"。', ja: '「答える」から「実行する」へ。', ko: '"답하기"에서 "실행하기"로.', fr: 'De « répondre » à « exécuter ».', de: 'Vom "Antworten" zum "Ausführen".', es: 'De "responder" a "ejecutar".', pt: 'De "responder" para "executar".' }) }}</div>
+
+<div class="grid grid-cols-2 gap-4 mt-6">
+  <DeckFeatureCard
+    tone="red"
+    icon="💬"
+    :title="{ en: 'Traditional LLM', zh: '传统大模型 (LLM)', ja: '従来の LLM', ko: '전통 LLM', fr: 'LLM traditionnel', de: 'Traditionelles LLM', es: 'LLM tradicional', pt: 'LLM tradicional' }"
+    :body="{ en: 'Only answers questions. Stays in the chat. You do the rest yourself.', zh: '只会回答问题，停留在对话，后续事情全靠人做。', ja: '質問に答えるだけ。会話で終わる。残りは人間任せ。', ko: '질문에 답만 함. 대화에서 멈춤. 나머지는 사람이 함.', fr: 'Répond seulement. Reste dans le chat. Vous faites le reste.', de: 'Antwortet nur. Bleibt beim Chat. Den Rest machst du selbst.', es: 'Solo responde. Se queda en el chat. Tú haces el resto.', pt: 'Apenas responde. Fica no chat. Você faz o resto.' }"
+  />
+  <DeckFeatureCard
+    tone="green"
+    icon="⚡"
+    :title="{ en: 'OpenClaw Agent', zh: 'OpenClaw Agent', ja: 'OpenClaw Agent', ko: 'OpenClaw Agent', fr: 'OpenClaw Agent', de: 'OpenClaw Agent', es: 'OpenClaw Agent', pt: 'OpenClaw Agent' }"
+    :body="{ en: 'Calls tools, reads files, hits APIs. Completes the task end-to-end.', zh: '调用工具、读文件、发请求。端到端完成任务。', ja: 'ツール呼出、ファイル読取、API 実行。エンドツーエンドで完遂。', ko: '도구 호출, 파일 읽기, API 호출. 엔드투엔드로 완료.', fr: 'Appelle des outils, lit des fichiers, frappe des APIs. Tâche de bout en bout.', de: 'Nutzt Tools, liest Dateien, trifft APIs. Erledigt Aufgaben Ende-zu-Ende.', es: 'Llama herramientas, lee archivos, golpea APIs. Tarea de extremo a extremo.', pt: 'Chama ferramentas, lê arquivos, bate APIs. Tarefa ponta a ponta.' }"
+  />
+</div>
+
+<div class="cw-note-panel mt-6" data-tone="cyan">
+  <p class="cw-note-copy" v-html="$t({ en: 'Same expense report — traditional AI <strong>tells you how</strong>. OpenClaw Agent <strong>does it</strong>: scan receipts → fill the form → submit to OA → notify you.', zh: '同一个报销流程 —— 传统 AI <strong>告诉你怎么做</strong>：&ldquo;需要发票、行程单、审批表...&rdquo;。OpenClaw Agent <strong>直接做完</strong>：识别发票 → 填写报销单 → 调用 OA 提交审批 → 通知你结果。', ja: '同じ経費精算 — 従来 AI は<strong>手順を教える</strong>。OpenClaw Agent は<strong>実行する</strong>：領収書認識 → フォーム記入 → OA 提出 → 通知。', ko: '같은 경비 처리 — 전통 AI는 <strong>방법만 알려줌</strong>. OpenClaw Agent는 <strong>직접 실행</strong>: 영수증 인식 → 양식 작성 → OA 제출 → 알림.', fr: 'Même note de frais — l’IA classique <strong>vous dit comment</strong>. OpenClaw Agent <strong>le fait</strong> : scan → formulaire → OA → notification.', de: 'Gleiche Spesenabrechnung — Klassische KI <strong>sagt wie</strong>. OpenClaw Agent <strong>macht es</strong>: Belege → Formular → OA → Meldung.', es: 'Mismo reembolso — IA clásica <strong>te dice cómo</strong>. OpenClaw Agent <strong>lo hace</strong>: recibos → formulario → OA → aviso.', pt: 'Mesmo reembolso — IA clássica <strong>diz como</strong>. OpenClaw Agent <strong>faz</strong>: recibos → formulário → OA → aviso.' })"></p>
+</div>
+
+<div class="cw-note-panel mt-4" data-tone="red">
+  <p class="cw-note-copy" v-html="$t({ en: '<strong>Because it can do things — we must now talk about what it can do wrong.</strong>', zh: '<strong>正因为它能&ldquo;做&rdquo; —— 接下来，我们要谈它能&ldquo;做错&rdquo;什么。</strong>', ja: '<strong>「実行できる」からこそ — 次は「間違える」話をする。</strong>', ko: '<strong>&ldquo;실행할 수 있다&rdquo; — 그래서 이제 &ldquo;잘못할 수 있는 것&rdquo;을 이야기해야 한다.</strong>', fr: '<strong>Parce qu’il peut agir — parlons de ce qu’il peut mal faire.</strong>', de: '<strong>Weil er handeln kann — reden wir, was schiefgehen kann.</strong>', es: '<strong>Porque puede actuar — hablemos de lo que puede salir mal.</strong>', pt: '<strong>Porque ele pode agir — vamos falar do que pode dar errado.</strong>' })"></p>
+</div>
+
+---
+
+# 🧨 {{ $t({ en: "Agent's New Threat Model", zh: 'Agent 的新威胁模型', ja: 'Agent の新しい脅威モデル', ko: 'Agent의 새로운 위협 모델', fr: 'Nouveau modèle de menace', de: 'Neues Bedrohungsmodell', es: 'Nuevo modelo de amenazas', pt: 'Novo modelo de ameaça' }) }}
+
+<div class="cw-kicker">{{ $t({ en: 'Traditional software vs Agent software — one table says it all.', zh: '传统软件 vs Agent 软件 —— 一张表讲清楚。', ja: '従来のソフトウェア vs Agent ソフトウェア — 一目でわかる。', ko: '전통 소프트웨어 vs Agent 소프트웨어 — 한 표로 정리.', fr: 'Logiciel classique vs Agent — un tableau suffit.', de: 'Klassische vs Agent-Software — eine Tabelle sagt alles.', es: 'Software tradicional vs Agent — una tabla lo dice todo.', pt: 'Software tradicional vs Agent — uma tabela diz tudo.' }) }}</div>
+
+<div class="grid grid-cols-2 gap-4 mt-6">
+  <DeckMiniPanel tone="cyan" :title="{ en: 'Code', zh: '代码', ja: 'コード', ko: '코드', fr: 'Code', de: 'Code', es: 'Código', pt: 'Código' }" :body="{ en: 'Classic: static — hunt for vulns. Agent: dynamic — the Agent itself can be hijacked.', zh: '传统：静态，找漏洞。Agent：动态，Agent 本身可能被操控。', ja: '従来：静的、脆弱性探し。Agent：動的、Agent 自体が操られる。', ko: '전통: 정적, 취약점 탐색. Agent: 동적, Agent 자체가 조종됨.', fr: 'Classique : statique. Agent : dynamique, lui-même manipulable.', de: 'Klassisch: statisch. Agent: dynamisch, selbst manipulierbar.', es: 'Clásico: estático. Agent: dinámico, manipulable.', pt: 'Clássico: estático. Agent: dinâmico, manipulável.' }" />
+
+  <DeckMiniPanel tone="red" :title="{ en: 'Input', zh: '输入', ja: '入力', ko: '입력', fr: 'Entrée', de: 'Eingabe', es: 'Entrada', pt: 'Entrada' }" :body="{ en: 'Classic: data ≠ command. Agent: input IS command (prompt injection).', zh: '传统：数据 ≠ 指令。Agent：输入即指令（prompt injection）。', ja: '従来：データ ≠ 命令。Agent：入力が命令（prompt injection）。', ko: '전통: 데이터 ≠ 명령. Agent: 입력이 곧 명령 (prompt injection).', fr: 'Classique : données ≠ commande. Agent : entrée = commande.', de: 'Klassisch: Daten ≠ Befehl. Agent: Eingabe IST Befehl.', es: 'Clásico: datos ≠ comando. Agent: entrada es comando.', pt: 'Clássico: dados ≠ comando. Agent: entrada é comando.' }" />
+
+  <DeckMiniPanel tone="yellow" :title="{ en: 'Privilege', zh: '权限', ja: '権限', ko: '권한', fr: 'Privilège', de: 'Rechte', es: 'Privilegios', pt: 'Privilégio' }" :body="{ en: 'Classic: fixed. Agent: tool-call rights get borrowed (confused deputy).', zh: '传统：固定。Agent：工具调用权限被借用（confused deputy）。', ja: '従来：固定。Agent：ツール呼出権限が借用される。', ko: '전통: 고정. Agent: 도구 호출 권한이 빌려짐 (confused deputy).', fr: 'Classique : fixes. Agent : appels outils empruntés.', de: 'Klassisch: fest. Agent: Tool-Rechte werden entliehen.', es: 'Clásico: fijos. Agent: derechos de herramienta prestados.', pt: 'Clássico: fixos. Agent: direitos de ferramenta emprestados.' }" />
+
+  <DeckMiniPanel tone="purple" :title="{ en: 'Patch', zh: '补丁', ja: 'パッチ', ko: '패치', fr: 'Correctif', de: 'Patch', es: 'Parche', pt: 'Patch' }" :body="{ en: 'Classic: fixable. Agent: prompt injection has no patch.', zh: '传统：能修。Agent：Prompt 注入没有&ldquo;补丁&rdquo;。', ja: '従来：修正可能。Agent：Prompt injection に&ldquo;パッチ&rdquo;なし。', ko: '전통: 수정 가능. Agent: Prompt injection에는 패치 없음.', fr: 'Classique : corrigible. Agent : pas de correctif à une injection.', de: 'Klassisch: fixbar. Agent: Prompt-Injection hat keinen Patch.', es: 'Clásico: parchable. Agent: no hay parche para inyección.', pt: 'Clássico: corrigível. Agent: sem patch para injection.' }" />
+</div>
+
+<div class="cw-note-panel mt-6" data-tone="red">
+  <p class="cw-note-copy" v-html="$t({ en: 'One sentence: <strong>in the Agent era, the boundary between input and command disappears.</strong> Defense in Depth is no longer optional.', zh: '一句话：<strong>Agent 时代，输入与指令的边界消失。</strong>纵深防御不是加分项，是前提。', ja: '一言：<strong>Agent 時代、入力と命令の境界は消える。</strong>多層防御は前提。', ko: '한마디: <strong>Agent 시대, 입력과 명령의 경계가 사라진다.</strong> 심층 방어는 전제.', fr: 'En un mot : <strong>à l’ère Agent, la frontière entre entrée et commande disparaît.</strong> La défense en profondeur est un prérequis.', de: 'In einem Satz: <strong>Im Agent-Zeitalter verschwindet die Grenze zwischen Eingabe und Befehl.</strong> Defense in Depth ist Pflicht.', es: 'En una frase: <strong>en la era Agent, desaparece el límite entre entrada y comando.</strong> La defensa en profundidad es un requisito.', pt: 'Em uma frase: <strong>na era Agent, a fronteira entre entrada e comando desaparece.</strong> Defesa em profundidade é pré-requisito.' })"></p>
+</div>
+
+---
+
+# ⚠️ {{ $t({ en: 'Six Core Risks', zh: '六大核心风险', ja: '6つのコアリスク', ko: '6대 핵심 위험', fr: 'Six risques majeurs', de: 'Sechs Kernrisiken', es: 'Seis riesgos clave', pt: 'Seis riscos centrais' }) }}
+
+<div class="cw-kicker">{{ $t({ en: 'Each one can be fatal. OpenClaw is "AI that can execute" — every hole is a double-edged sword.', zh: 'OpenClaw 是&ldquo;能执行&rdquo;的 AI —— 所以每一个漏洞都是双刃剑。', ja: 'OpenClaw は&ldquo;実行できる&rdquo; AI —— どの穴も両刃の剣。', ko: 'OpenClaw는 &ldquo;실행 가능한&rdquo; AI —— 모든 구멍이 양날의 검.', fr: "OpenClaw est une IA qui exécute — chaque faille est une épée à double tranchant.", de: 'OpenClaw ist ausführende KI — jede Lücke ist zweischneidig.', es: 'OpenClaw es IA que ejecuta — cada agujero es espada de doble filo.', pt: 'OpenClaw é IA que executa — cada falha é espada de dois gumes.' }) }}</div>
+
+<div class="grid grid-cols-3 gap-3 mt-6">
+  <DeckFeatureCard
+    compact
+    tone="red"
+    icon="🎯"
+    :title="{ en: 'Prompt Injection', zh: '提示词注入', ja: 'プロンプト注入', ko: '프롬프트 주입', fr: 'Injection de prompt', de: 'Prompt Injection', es: 'Inyección de prompt', pt: 'Injeção de prompt' }"
+    :body="{ en: 'Crafted prompts bypass guardrails. Data leak, system damage.', zh: '精心设计的提示词绕过安全限制。数据泄露、系统破坏。', ja: '巧妙な prompt がガードを回避。データ漏洩・破壊。', ko: '정교한 프롬프트가 가드를 우회. 데이터 유출, 시스템 파괴.', fr: 'Prompts conçus contournent les garde-fous. Fuite, dégâts.', de: 'Gezielte Prompts umgehen Schutz. Leak, Schaden.', es: 'Prompts diseñados burlan controles. Fuga, daño.', pt: 'Prompts engenhosos burlam guardas. Vazamento, dano.' }"
+  />
+  <DeckFeatureCard
+    compact
+    tone="purple"
+    icon="🧩"
+    :title="{ en: 'Malicious Plugins', zh: '恶意插件', ja: '悪意あるプラグイン', ko: '악성 플러그인', fr: 'Plugins malveillants', de: 'Bösartige Plugins', es: 'Plugins maliciosos', pt: 'Plugins maliciosos' }"
+    :body="{ en: 'ClawHub plugins may ship malware. Supply-chain → remote control.', zh: 'ClawHub 插件可能包含恶意代码。供应链攻击 → 远程控制。', ja: 'ClawHub のプラグインにマルウェア混入の恐れ。サプライチェーン → 遠隔制御。', ko: 'ClawHub 플러그인에 악성 코드 가능. 공급망 → 원격 제어.', fr: 'Plugins ClawHub peuvent contenir du malware. Chaîne → contrôle à distance.', de: 'ClawHub-Plugins können Malware enthalten. Supply-Chain → Fernsteuerung.', es: 'Plugins de ClawHub pueden traer malware. Cadena → control remoto.', pt: 'Plugins do ClawHub podem trazer malware. Supply-chain → controle remoto.' }"
+  />
+  <DeckFeatureCard
+    compact
+    tone="yellow"
+    icon="🕵️"
+    :title="{ en: 'Session Hijack', zh: '会话劫持', ja: 'セッション乗取り', ko: '세션 하이재킹', fr: 'Détournement de session', de: 'Session-Hijacking', es: 'Secuestro de sesión', pt: 'Sequestro de sessão' }"
+    :body="{ en: 'Attackers grab session tokens. Identity forged, hard to detect.', zh: '攻击者截获会话令牌，冒充合法用户，难以发现。', ja: 'セッショントークン窃取でユーザー偽装、検知困難。', ko: '세션 토큰 탈취로 신원 위조, 탐지 어려움.', fr: 'Jetons de session volés. Identité falsifiée.', de: 'Session-Tokens abgegriffen. Identität gefälscht.', es: 'Tokens robados. Identidad falsificada.', pt: 'Tokens roubados. Identidade forjada.' }"
+  />
+  <DeckFeatureCard
+    compact
+    tone="red"
+    icon="🔓"
+    :title="{ en: 'Over-Privilege', zh: '越权访问', ja: '権限過大', ko: '권한 초과', fr: 'Sur-privilège', de: 'Überrechte', es: 'Sobre-privilegio', pt: 'Sobre-privilégio' }"
+    :body="{ en: 'Agent granted too much. Reads beyond its job. Sensitive data leaked.', zh: 'Agent 权限过高，访问超出职责范围。敏感数据泄露。', ja: 'Agent の権限が過大。職務外へアクセス。機密漏洩。', ko: 'Agent 권한 과도. 직무 범위 초과. 민감 정보 유출.', fr: 'Agent trop privilégié. Accès hors-périmètre. Fuite.', de: 'Agent überprivilegiert. Zugriff außerhalb. Leak.', es: 'Agent sobre-privilegiado. Acceso fuera de alcance. Fuga.', pt: 'Agent com privilégio excessivo. Acesso fora do escopo. Vazamento.' }"
+  />
+  <DeckFeatureCard
+    compact
+    tone="cyan"
+    icon="👁️"
+    :title="{ en: 'No Audit Trail', zh: '无审计', ja: '監査なし', ko: '감사 부재', fr: 'Pas d’audit', de: 'Kein Audit', es: 'Sin auditoría', pt: 'Sem auditoria' }"
+    :body="{ en: 'No logs, no trace after incident. Compliance risk.', zh: '无完整日志，事后无法追溯、无法追责。合规风险。', ja: 'ログ不足、事後追跡不可能。コンプライアンスリスク。', ko: '로그 부족, 사후 추적 불가. 컴플라이언스 위험.', fr: 'Pas de logs, aucune traçabilité. Risque conformité.', de: 'Keine Logs, keine Nachverfolgung. Compliance-Risiko.', es: 'Sin logs ni trazabilidad. Riesgo de cumplimiento.', pt: 'Sem logs ou rastro. Risco de compliance.' }"
+  />
+  <DeckFeatureCard
+    compact
+    tone="purple"
+    icon="📈"
+    :title="{ en: 'API Abuse', zh: 'API 滥用', ja: 'API 濫用', ko: 'API 남용', fr: 'Abus d’API', de: 'API-Missbrauch', es: 'Abuso de API', pt: 'Abuso de API' }"
+    :body="{ en: 'Runaway token burn. No budget control. Cost explosion.', zh: 'Token 消耗失控，缺成本管控。成本爆炸。', ja: 'Token 消費暴走、コスト管理不足。費用爆発。', ko: 'Token 소비 폭주, 비용 관리 미흡. 비용 폭발.', fr: 'Tokens incontrôlés, pas de budget. Coût explosif.', de: 'Token-Explosion, kein Budget. Kosten explodieren.', es: 'Tokens descontrolados, sin presupuesto. Costo explosivo.', pt: 'Tokens descontrolados, sem orçamento. Custo explosivo.' }"
+  />
+</div>
+
+<div class="cw-note-panel mt-4" data-tone="red">
+  <p class="cw-note-copy" v-html="$t({ en: '<strong>Prompt injection is just the trigger.</strong> The real loss comes from the fact that Agents <strong>have tool privileges</strong> in the first place. Enterprise security is not about blocking every hole — it’s about making sure when one breaks, another layer still catches it.', zh: '<strong>Prompt injection 只是触发器。</strong>真正的损失来自 Agent 有&ldquo;工具权限&rdquo;这件事本身。企业养虾必守安全底线 —— 不追求堵死每一个，而是让任何一个被突破时，其他层还能抓住它。', ja: '<strong>Prompt injection は引き金に過ぎない。</strong>本当の損失は Agent が&ldquo;ツール権限&rdquo;を持つこと自体から。どれか突破されても他層が止められるようにする。', ko: '<strong>Prompt injection은 방아쇠에 불과.</strong> 진짜 손실은 Agent가 &ldquo;도구 권한&rdquo;을 가진다는 사실 자체. 하나 뚫려도 다른 층이 잡도록.', fr: '<strong>L’injection n’est qu’un déclencheur.</strong> La vraie perte vient du fait que l’Agent <strong>a des privilèges</strong>. Quand une couche cède, une autre doit rattraper.', de: '<strong>Prompt Injection ist nur der Auslöser.</strong> Der echte Verlust kommt davon, dass Agents <strong>Tool-Rechte</strong> haben. Wenn eine Schicht fällt, muss die nächste halten.', es: '<strong>La inyección es solo el gatillo.</strong> La pérdida real viene de que el Agent <strong>tiene privilegios</strong>. Si una capa cae, otra debe atajar.', pt: '<strong>Injection é só o gatilho.</strong> A perda real vem de o Agent <strong>ter privilégios</strong>. Se uma camada cai, outra precisa segurar.' })"></p>
+</div>
+
+---
+
+<div class="cw-grid"></div>
+<div class="glow-orb glow-green cw-pulse" style="top:-80px; right:20%;"></div>
+<div class="glow-orb glow-cyan cw-pulse" style="bottom:-60px; left:35%;"></div>
+
+<div class="cw-thanks-shell">
+  <h1 class="cw-display-title">
+    <span class="cw-shimmer">{{ $t({ en: 'Defense in Depth', zh: '纵深防御', ja: '多層防御', ko: '심층 방어', fr: 'Défense en profondeur', de: 'Defense in Depth', es: 'Defensa en profundidad', pt: 'Defesa em profundidade' }) }}</span>
+  </h1>
+  <p class="cw-thanks-copy">{{ $t({ en: "ClawWork's layered defense map.", zh: 'ClawWork 的分层防御地图。', ja: 'ClawWork の分層防御マップ。', ko: 'ClawWork의 계층 방어 지도.', fr: 'La carte de défense en couches de ClawWork.', de: 'ClawWorks mehrschichtige Verteidigungskarte.', es: 'El mapa de defensa por capas de ClawWork.', pt: 'O mapa de defesa em camadas do ClawWork.' }) }}</p>
+</div>
+
+---
+
+# 🗺️ {{ $t({ en: 'Layered Defense Map', zh: '分层防御地图', ja: '分層防御マップ', ko: '계층 방어 지도', fr: 'Carte de défense', de: 'Verteidigungskarte', es: 'Mapa de defensa', pt: 'Mapa de defesa' }) }}
+
+<div class="cw-kicker">{{ $t({ en: '6 risks → 5 direct defenses + 1 still open.', zh: '6 个风险 → 5 个直接防御 + 1 个待解决。', ja: '6 つのリスク → 5 つの直接防御 + 1 つ未解決。', ko: '6개 위험 → 5개 직접 방어 + 1개 미해결.', fr: '6 risques → 5 défenses directes + 1 en suspens.', de: '6 Risiken → 5 direkte Verteidigungen + 1 offen.', es: '6 riesgos → 5 defensas directas + 1 pendiente.', pt: '6 riscos → 5 defesas diretas + 1 em aberto.' }) }}</div>
+
+```text
+┌────────────────────────────────────────────────────────┐
+│  横切 · 观测     操作审计日志 + Token 配额                │
+│                  防 👁️ 无审计  /  📈 API 滥用             │
+└────────────────────────────────────────────────────────┘
+
+┌────────────────────────────────────────────────────────┐
+│  L7  UX         明确审批 + Dialog guard  ← 🎯 提示词注入 │
+│  L6  文件系统    realpath + 工作区 scope   ← 🔓 越权访问  │
+│  L5  密钥        宿主 OS keychain         ← 二进制逆向    │
+│  L4  消息        单写入者持久化            ← history 污染  │
+│  L3  会话        buildSessionKey 强隔离    ← 🕵️ 会话劫持 │
+│  L2  网络        SSRF guard               ← 内网穿透     │
+│  L1  进程        Electron 硬化             ← renderer RCE │
+└────────────────────────────────────────────────────────┘
+```
+
+<div class="cw-note-panel mt-4" data-tone="green">
+  <p class="cw-note-copy" v-html="$t({ en: '✓ Covers 5: <strong>prompt injection · over-privilege · session hijack · no audit · API abuse</strong>. 🚧 1 left — <strong>malicious plugins / supply-chain</strong> still unsolved (details later). Every layer fights alone, the cross-cutting layer watches all — we trust none to hold by itself.', zh: '✓ 覆盖 5 个：<strong>提示词注入 · 越权访问 · 会话劫持 · 无审计 · API 滥用</strong>。🚧 剩 1 个 —— <strong>恶意插件 / 供应链</strong> 还没完美解决，稍后专门讲。每一层独立设防，横切层全程观测 —— 不信任任何一层不会被突破。', ja: '✓ 5 つカバー：<strong>prompt injection · 権限過大 · セッション乗取り · 監査なし · API 濫用</strong>。🚧 残り 1 —— <strong>悪意あるプラグイン / サプライチェーン</strong> は未解決。各層独立、横切層で全観測。', ko: '✓ 5개 커버: <strong>프롬프트 주입 · 권한 초과 · 세션 하이재킹 · 감사 부재 · API 남용</strong>. 🚧 1개 남음 — <strong>악성 플러그인 / 공급망</strong>. 각 층 독립, 횡단 층이 전체 관찰.', fr: '✓ 5 couvertes : <strong>injection · sur-privilège · détournement · audit · abus API</strong>. 🚧 1 restante — <strong>plugins malveillants / chaîne</strong>. Chaque couche indépendante.', de: '✓ 5 abgedeckt: <strong>Injection · Überrechte · Hijack · Audit · API-Missbrauch</strong>. 🚧 1 offen — <strong>Plugins / Supply-Chain</strong>. Jede Schicht unabhängig.', es: '✓ 5 cubiertos: <strong>inyección · sobre-privilegio · secuestro · auditoría · abuso API</strong>. 🚧 1 pendiente — <strong>plugins / cadena</strong>. Cada capa independiente.', pt: '✓ 5 cobertos: <strong>injection · sobre-privilégio · sequestro · auditoria · abuso API</strong>. 🚧 1 aberto — <strong>plugins / supply-chain</strong>. Cada camada independente.' })"></p>
+</div>
+
+---
+
+# 🔑 {{ $t({ en: 'Session Key — Cross-Task Isolation', zh: 'Session Key — 防跨 Task 串流', ja: 'Session Key — タスク間分離', ko: 'Session Key — Task 간 격리', fr: 'Session Key — Isolation inter-tâches', de: 'Session Key — Task-Isolation', es: 'Session Key — Aislamiento entre tareas', pt: 'Session Key — Isolamento entre tarefas' }) }}
+
+<div class="cw-kicker">{{ $t({ en: 'A seemingly boring design that saved us from a real incident.', zh: '一个看似无聊、但踩过真实事故的设计。', ja: '無味乾燥に見えて、実際の事故を踏んだ設計。', ko: '지루해 보이지만 실제 사고를 겪은 설계.', fr: "Un design qui paraît banal — mais qui vient d'un vrai incident.", de: 'Ein scheinbar banaler Entwurf — aus einem echten Vorfall geboren.', es: 'Un diseño aparentemente aburrido — nacido de un incidente real.', pt: 'Um design aparentemente chato — nascido de um incidente real.' }) }}</div>
+
+```typescript
+// packages/shared/src/constants.ts
+buildSessionKey(taskId, 'main');
+// → 'agent:main:clawwork:task:<taskId>'
+```
+
+<ul class="cw-bullets mt-4">
+  <li v-html="$t({ en: '<strong>Function-only construction</strong> — no raw string concat allowed', zh: '<strong>只能用函数构造</strong>，不准拼字符串', ja: '<strong>関数でのみ構築</strong>、文字列結合禁止', ko: '<strong>함수로만 생성</strong>, 문자열 조합 금지', fr: '<strong>Construction uniquement par fonction</strong> — pas de concaténation', de: '<strong>Nur per Funktion</strong> — keine String-Konkatenation', es: '<strong>Solo por función</strong> — sin concatenar strings', pt: '<strong>Só por função</strong> — sem concatenar strings' })"></li>
+  <li v-html="$t({ en: '<strong>Gateway broadcasts everything</strong> — clients MUST filter by sessionKey', zh: '<strong>Gateway 广播所有事件</strong>，客户端必须按 sessionKey 过滤', ja: '<strong>Gateway は全イベント配信</strong>、クライアントは sessionKey でフィルタ必須', ko: '<strong>Gateway는 모든 이벤트 브로드캐스트</strong>, 클라이언트는 sessionKey로 필터 필수', fr: '<strong>Gateway diffuse tout</strong> — les clients doivent filtrer par sessionKey', de: '<strong>Gateway sendet alles</strong> — Clients MÜSSEN nach sessionKey filtern', es: '<strong>Gateway difunde todo</strong> — clientes DEBEN filtrar por sessionKey', pt: '<strong>Gateway transmite tudo</strong> — clientes DEVEM filtrar por sessionKey' })"></li>
+  <li v-html="$t({ en: '<strong>One missed filter = cross-task data leak</strong>', zh: '<strong>漏一个过滤器 = 跨 Task 数据泄漏</strong>', ja: '<strong>フィルタ漏れ = タスク間データ漏洩</strong>', ko: '<strong>필터 누락 = Task 간 데이터 유출</strong>', fr: '<strong>Un filtre manquant = fuite inter-tâches</strong>', de: '<strong>Ein fehlender Filter = Task-übergreifender Leak</strong>', es: '<strong>Un filtro omitido = fuga entre tareas</strong>', pt: '<strong>Um filtro esquecido = vazamento entre tarefas</strong>' })"></li>
+</ul>
+
+<div class="cw-note-panel mt-4" data-tone="red">
+  <p class="cw-note-copy" v-html="$t({ en: 'This is not theory. <strong>We actually missed a filter once in review.</strong> Single-writer + strong sessionKey became our safety net.', zh: '这不是理论。<strong>我们真的在一次 review 里漏过一个过滤器。</strong>单写入者 + 强 sessionKey 的组合，是我们后来的兜底。', ja: '理論ではない。<strong>実際にレビューで一度フィルタを漏らした。</strong>単一書き手 + 強 sessionKey が後の保険となった。', ko: '이론이 아니다. <strong>실제로 리뷰에서 한 번 필터를 놓쳤다.</strong> 단일 작성자 + 강한 sessionKey가 안전망이 됐다.', fr: 'Pas de théorie. <strong>On a vraiment raté un filtre en revue.</strong> Writer unique + sessionKey fort — notre filet.', de: 'Keine Theorie. <strong>Wir haben tatsächlich einen Filter im Review übersehen.</strong> Single-Writer + starker sessionKey — unser Netz.', es: 'No es teoría. <strong>Realmente olvidamos un filtro en review.</strong> Writer único + sessionKey fuerte — nuestra red.', pt: 'Não é teoria. <strong>Realmente esquecemos um filtro em review.</strong> Writer único + sessionKey forte — nossa rede.' })"></p>
+</div>
+
+---
+
+# 🚧 {{ $t({ en: 'Open Problems', zh: '还没解决的问题', ja: '未解決の問題', ko: '미해결 문제', fr: 'Problèmes ouverts', de: 'Offene Probleme', es: 'Problemas abiertos', pt: 'Problemas em aberto' }) }}
+
+<div class="cw-kicker">{{ $t({ en: 'An honest list — not every layer is airtight.', zh: '诚实清单 —— 不是所有层都严丝合缝。', ja: '正直なリスト — すべての層が完璧ではない。', ko: '솔직한 목록 — 모든 층이 완벽하진 않다.', fr: 'Une liste honnête — toutes les couches ne sont pas étanches.', de: 'Eine ehrliche Liste — nicht jede Schicht ist dicht.', es: 'Lista honesta — no todas las capas son herméticas.', pt: 'Lista honesta — nem toda camada é hermética.' }) }}</div>
+
+<ul class="cw-bullets mt-6">
+  <li v-html="$t({ en: '<strong>Prompt Injection itself</strong> — no silver bullet in the industry', zh: '<strong>Prompt Injection 本身</strong> —— 业界没有银弹', ja: '<strong>Prompt Injection そのもの</strong> —— 業界に銀の弾丸なし', ko: '<strong>Prompt Injection 자체</strong> —— 업계에 은탄은 없다', fr: '<strong>L’injection de prompt elle-même</strong> — pas de solution miracle', de: '<strong>Prompt Injection selbst</strong> — keine Silver Bullet', es: '<strong>La inyección misma</strong> — no hay bala de plata', pt: '<strong>Prompt Injection em si</strong> — sem bala de prata' })"></li>
+  <li v-html="$t({ en: '<strong>Third-party Skill supply chain</strong> — no automated signature audit yet', zh: '<strong>第三方 Skill 供应链</strong> —— 没有自动化签名审计', ja: '<strong>サードパーティ Skill サプライチェーン</strong> —— 署名監査未整備', ko: '<strong>서드파티 Skill 공급망</strong> —— 자동 서명 감사 없음', fr: '<strong>Chaîne Skill tierce</strong> — pas d’audit de signature automatisé', de: '<strong>Drittanbieter-Skill-Supply-Chain</strong> — kein Signatur-Audit', es: '<strong>Cadena Skill de terceros</strong> — sin auditoría de firma', pt: '<strong>Supply-chain de Skills</strong> — sem auditoria de assinatura' })"></li>
+  <li v-html="$t({ en: '<strong>Agent file scope</strong> — still relies on users configuring workspace correctly', zh: '<strong>Agent 文件 scope</strong> —— 依赖用户自觉配置工作区', ja: '<strong>Agent ファイル scope</strong> —— ユーザーの workspace 設定頼み', ko: '<strong>Agent 파일 scope</strong> —— 사용자의 workspace 설정에 의존', fr: '<strong>Scope fichier Agent</strong> — dépend de la config utilisateur', de: '<strong>Agent-Datei-Scope</strong> — hängt von Nutzerkonfiguration ab', es: '<strong>Scope de archivos</strong> — depende de la config del usuario', pt: '<strong>Scope de arquivos</strong> — depende da config do usuário' })"></li>
+  <li v-html="$t({ en: '<strong>Gateway-level policy</strong> — missing a pluggable policy engine', zh: '<strong>Gateway 层 policy</strong> —— 缺可插拔 policy 引擎', ja: '<strong>Gateway レイヤ policy</strong> —— プラガブルなエンジン不足', ko: '<strong>Gateway 정책</strong> —— 플러그형 엔진 부족', fr: '<strong>Policy Gateway</strong> — pas de moteur enfichable', de: '<strong>Gateway-Policy</strong> — kein Plugin-Engine', es: '<strong>Policy en Gateway</strong> — sin motor conectable', pt: '<strong>Policy do Gateway</strong> — sem motor plugável' })"></li>
+</ul>
+
+<div class="cw-note-panel mt-4" data-tone="purple">
+  <p class="cw-note-copy" v-html="$t({ en: '<strong>This is why Defense in Depth exists.</strong> Even if one layer falls, the others catch it. No perfect boundary — only layered redundancy.', zh: '<strong>这就是纵深防御存在的理由：</strong>即使某一层被突破，其他层还能兜底。没有完美的边界 —— 只有层层的冗余。', ja: '<strong>これが多層防御の理由。</strong>どれか破られても他層が止める。完璧な境界はない — 層ごとの冗長性のみ。', ko: '<strong>이것이 심층 방어의 이유.</strong> 한 층이 뚫려도 다른 층이 막는다. 완벽한 경계는 없다 — 오직 층층의 여분.', fr: '<strong>Voilà pourquoi la défense en profondeur existe.</strong> Même si une couche tombe, les autres rattrapent. Pas de frontière parfaite — seulement de la redondance.', de: '<strong>Deshalb gibt es Defense in Depth.</strong> Fällt eine Schicht, fangen andere sie. Keine perfekte Grenze — nur geschichtete Redundanz.', es: '<strong>Por eso existe la defensa en profundidad.</strong> Si una capa cae, las otras atajan. No hay frontera perfecta — solo redundancia por capas.', pt: '<strong>Por isso existe defesa em profundidade.</strong> Se uma camada cai, as outras seguram. Sem fronteira perfeita — só redundância em camadas.' })"></p>
+</div>
+
+---
+
+# 🎯 {{ $t({ en: 'Three Takeaways → Into the Real Thing', zh: '小结 → 进入正题', ja: 'まとめ → 本題へ', ko: '요약 → 본론으로', fr: 'Récap → passons au vif', de: 'Fazit → zum Thema', es: 'Resumen → al grano', pt: 'Resumo → ao que interessa' }) }}
+
+<div class="cw-kicker">{{ $t({ en: 'Three things to walk away with:', zh: '三个带走的点：', ja: '持ち帰ってほしい 3 点：', ko: '가지고 갈 세 가지:', fr: 'Trois choses à retenir :', de: 'Drei Dinge zum Mitnehmen:', es: 'Tres cosas para llevar:', pt: 'Três coisas para levar:' }) }}</div>
+
+<ul class="cw-bullets mt-6">
+  <li v-html="$t({ en: '<strong>1.</strong> In the Agent era, security is an engineering <strong>prerequisite</strong>, not a feature', zh: '<strong>1.</strong> Agent 时代，安全是工程<strong>前提</strong>，不是功能', ja: '<strong>1.</strong> Agent 時代、セキュリティは<strong>前提</strong>であり機能ではない', ko: '<strong>1.</strong> Agent 시대, 보안은 엔지니어링 <strong>전제</strong>이지 기능이 아니다', fr: '<strong>1.</strong> À l’ère Agent, la sécurité est un <strong>prérequis</strong>, pas une fonctionnalité', de: '<strong>1.</strong> Im Agent-Zeitalter ist Sicherheit eine <strong>Voraussetzung</strong>, kein Feature', es: '<strong>1.</strong> En la era Agent, la seguridad es un <strong>prerequisito</strong>, no una función', pt: '<strong>1.</strong> Na era Agent, segurança é um <strong>pré-requisito</strong>, não uma feature' })"></li>
+  <li v-html="$t({ en: '<strong>2.</strong> The value of Defense in Depth lies not in “perfection” but in <strong>redundancy</strong>', zh: '<strong>2.</strong> 纵深防御的价值不在&ldquo;完美&rdquo;，在<strong>&ldquo;冗余&rdquo;</strong>', ja: '<strong>2.</strong> 多層防御の価値は&ldquo;完璧&rdquo;ではなく<strong>&ldquo;冗長性&rdquo;</strong>にある', ko: '<strong>2.</strong> 심층 방어의 가치는 &ldquo;완벽&rdquo;이 아니라 <strong>&ldquo;여분&rdquo;</strong>', fr: '<strong>2.</strong> La valeur de la défense en profondeur : pas la perfection, mais la <strong>redondance</strong>', de: '<strong>2.</strong> Der Wert liegt nicht in „Perfektion“, sondern in <strong>Redundanz</strong>', es: '<strong>2.</strong> El valor está en la <strong>redundancia</strong>, no en la perfección', pt: '<strong>2.</strong> O valor está na <strong>redundância</strong>, não na perfeição' })"></li>
+  <li v-html="$t({ en: '<strong>3.</strong> ClawWork as a case study: <strong>7 stacked layers</strong>, each answering one real threat', zh: '<strong>3.</strong> ClawWork 作为 case study：<strong>7 层叠加</strong>，每层对应一个真实威胁', ja: '<strong>3.</strong> ClawWork はケーススタディ：<strong>7 層の積み重ね</strong>、各層が実際の脅威に対応', ko: '<strong>3.</strong> ClawWork는 사례 연구: <strong>7개 층 누적</strong>, 각 층이 실제 위협에 대응', fr: '<strong>3.</strong> ClawWork en étude de cas : <strong>7 couches empilées</strong>, chacune pour une menace réelle', de: '<strong>3.</strong> ClawWork als Fallstudie: <strong>7 gestapelte Schichten</strong>, jede gegen eine echte Bedrohung', es: '<strong>3.</strong> ClawWork como caso: <strong>7 capas apiladas</strong>, cada una contra una amenaza real', pt: '<strong>3.</strong> ClawWork como case: <strong>7 camadas empilhadas</strong>, cada uma contra uma ameaça real' })"></li>
+</ul>
+
+<div class="cw-note-panel mt-6" data-tone="green">
+  <p class="cw-note-copy" v-html="$t({ en: '<strong>So — let’s see what this “defense-in-depth workbench” actually looks like in daily use. 👇</strong>', zh: '<strong>那么，让我们看看这个&ldquo;纵深防御的工作台&rdquo;日常用起来到底长什么样 —— 👇</strong>', ja: '<strong>では、この&ldquo;多層防御のワークベンチ&rdquo;が日常でどう見えるか見てみよう —— 👇</strong>', ko: '<strong>그럼, 이 &ldquo;심층 방어 워크벤치&rdquo;가 일상에서 어떻게 보이는지 봅시다 —— 👇</strong>', fr: '<strong>Alors — voyons à quoi ressemble cet « atelier de défense » au quotidien 👇</strong>', de: '<strong>Also — schauen wir, wie diese „Defense-in-Depth-Werkbank“ im Alltag aussieht 👇</strong>', es: '<strong>Entonces — veamos cómo se ve este &ldquo;banco de defensa&rdquo; en el día a día 👇</strong>', pt: '<strong>Então — vamos ver como é esse &ldquo;workbench de defesa&rdquo; no dia a dia 👇</strong>' })"></p>
+</div>
 
 ---
 
@@ -144,8 +356,8 @@ exportFilename: clawwork-keynote
 </div>
 
 ---
-layout: split-media
----
+
+## layout: split-media
 
 # 🖥 {{ $t({ en: 'Three-Panel Layout', zh: '三栏布局', ja: '3ペインレイアウト', ko: '3패널 레이아웃', fr: 'Disposition en trois panneaux', de: 'Drei-Panel-Layout', es: 'Diseño de tres paneles', pt: 'Layout de três painéis' }) }}
 
@@ -164,8 +376,8 @@ layout: split-media
 <DeckMiniPanel neutral tone="purple" :title="{ en: 'Right Panel', zh: '右侧面板', ja: '右パネル', ko: '우측 패널', fr: 'Panneau droit', de: 'Rechtes Panel', es: 'Panel derecho', pt: 'Painel direito' }" :body="{ en: 'Progress tracking and artifact browser.', zh: '进度追踪和产物浏览。', ja: '進捗追跡とアーティファクトブラウザ。', ko: '진행 상황 추적 및 아티팩트 브라우저.', fr: 'Suivi de progression et navigateur d’artefacts.', de: 'Fortschrittsverfolgung und Artefakt-Browser.', es: 'Seguimiento de progreso y explorador de artefactos.', pt: 'Acompanhamento de progresso e navegador de artefatos.' }" />
 
 ---
-layout: split-media
----
+
+## layout: split-media
 
 # ⚡ {{ $t({ en: 'Multi-Session in Action', zh: '多会话实战', ja: 'マルチセッション実践', ko: '멀티 세션 실전', fr: 'Multi-session en action', de: 'Multi-Sitzung in Aktion', es: 'Multisesión en acción', pt: 'Multissessão em ação' }) }}
 
@@ -216,8 +428,10 @@ layout: split-media
 <DeckTaskProgressSlide />
 
 ---
+
 layout: split-media
 gap: mt-6
+
 ---
 
 # 🧠 {{ $t({ en: 'Token & Context Awareness', zh: 'Token 与上下文感知', ja: 'Token とコンテキスト管理', ko: 'Token 및 컨텍스트 인식', fr: 'Gestion Token et contexte', de: 'Token- & Kontext-Bewusstsein', es: 'Gestión de Token y contexto', pt: 'Gestão de Token e contexto' }) }}
@@ -251,8 +465,8 @@ gap: mt-6
 <DeckFeatureMatrixSlide />
 
 ---
-layout: split-media
----
+
+## layout: split-media
 
 # 🧩 {{ $t({ en: 'Skills & ClawHub', zh: 'Skills 与 ClawHub', ja: 'Skills と ClawHub', ko: 'Skills & ClawHub', fr: 'Skills & ClawHub', de: 'Skills & ClawHub', es: 'Skills y ClawHub', pt: 'Skills e ClawHub' }) }}
 
@@ -271,8 +485,8 @@ layout: split-media
 <DeckMiniPanel tone="purple" :title="{ en: 'Schema-Driven', zh: 'Schema 驱动', ja: 'スキーマ駆動', ko: '스키마 기반', fr: 'Guidé par schéma', de: 'Schema-basiert', es: 'Por esquema', pt: 'Por schema' }" :body="{ en: 'Skills self-describe their config. The UI generates the form.', zh: 'Skill 自描述配置，UI 自动生成表单。', ja: 'Skill が設定を記述。UI が自動生成。', ko: 'Skill이 설정 기술. UI가 폼 자동 생성.', fr: 'Les skills décrivent leur config. UI auto-générée.', de: 'Skills beschreiben sich selbst. UI wird generiert.', es: 'Los skills se describen. UI generada.', pt: 'Skills se descrevem. UI gerada.' }" />
 
 ---
-layout: split-media
----
+
+## layout: split-media
 
 # 🤖 {{ $t({ en: 'Agent Manager', zh: 'Agent 管理', ja: 'Agent マネージャー', ko: 'Agent 매니저', fr: 'Gestionnaire d’Agent', de: 'Agent-Verwaltung', es: 'Gestor de Agent', pt: 'Gerenciador de Agent' }) }}
 
@@ -292,8 +506,8 @@ layout: split-media
 </ul>
 
 ---
-layout: split-media
----
+
+## layout: split-media
 
 # 🧙 {{ $t({ en: 'Agent Builder', zh: 'Agent 构建器', ja: 'Agent ビルダー', ko: 'Agent 빌더', fr: 'Agent Builder', de: 'Agent-Builder', es: 'Agent Builder', pt: 'Agent Builder' }) }}
 
@@ -313,8 +527,8 @@ layout: split-media
 </ul>
 
 ---
-layout: split-media
----
+
+## layout: split-media
 
 # 🧬 {{ $t({ en: 'ClawWork Teams', zh: 'ClawWork Teams', ja: 'ClawWork Teams', ko: 'ClawWork Teams', fr: 'ClawWork Teams', de: 'ClawWork Teams', es: 'ClawWork Teams', pt: 'ClawWork Teams' }) }}
 
@@ -337,8 +551,8 @@ layout: split-media
 </div>
 
 ---
-layout: split-media
----
+
+## layout: split-media
 
 # 🎯 {{ $t({ en: 'Teams in Action', zh: 'Team 实战', ja: 'チーム実践', ko: '팀 실전', fr: 'Teams en action', de: 'Teams in Aktion', es: 'Teams en acción', pt: 'Teams em ação' }) }}
 
@@ -357,8 +571,8 @@ layout: split-media
 <DeckMiniPanel tone="cyan" :title="{ en: 'Team Chat Room', zh: '团队聊天室', ja: 'チームチャットルーム', ko: '팀 채팅방', fr: 'Salon de chat', de: 'Team-Chatraum', es: 'Sala del equipo', pt: 'Sala do time' }" :body="{ en: 'Live avatar bar: who speaks, who executes.', zh: '实时头像栏：谁在说话、谁在执行。', ja: 'ライブアバターバー：発話者と実行者。', ko: '라이브 아바타 바: 발언자·실행자.', fr: 'Barre d’avatars : qui parle, qui exécute.', de: 'Live-Avatar-Leiste: wer spricht, wer ausführt.', es: 'Barra de avatares: quién habla y ejecuta.', pt: 'Barra de avatares: quem fala e executa.' }" />
 
 ---
-layout: split-media
----
+
+## layout: split-media
 
 # 🏪 {{ $t({ en: 'TeamsHub', zh: 'TeamsHub', ja: 'TeamsHub', ko: 'TeamsHub', fr: 'TeamsHub', de: 'TeamsHub', es: 'TeamsHub', pt: 'TeamsHub' }) }}
 
@@ -394,8 +608,8 @@ layout: split-media
 <DeckMiniPanel tone="purple" :title="{ en: 'Multi-Source Registries', zh: '多源 Registry', ja: 'マルチソース Registry', ko: '멀티 소스 레지스트리', fr: 'Registres multi-sources', de: 'Multi-Source-Registries', es: 'Registries multi-fuente', pt: 'Registries multi-fonte' }" :body="{ en: 'Community, private, team. Add as many registries as you want — all Git-based.', zh: '社区、私有、团队。想加多少 registry 就加多少 —— 全部基于 Git。', ja: 'コミュニティ、プライベート、チーム。好きなだけ registry を追加 —— すべて Git ベース。', ko: '커뮤니티, 프라이빗, 팀. 원하는 만큼 registry 추가 — 모두 Git 기반.', fr: 'Communauté, privé, équipe. Ajoutez autant de registres que voulu — tous Git.', de: 'Community, privat, Team. So viele Registries wie du willst — alle Git-basiert.', es: 'Comunidad, privado, equipo. Añade tantos registries como quieras — todos en Git.', pt: 'Comunidade, privado, time. Adicione quantos registries quiser — todos em Git.' }" />
 
 ---
-layout: split-media
----
+
+## layout: split-media
 
 # 🎭 {{ $t({ en: 'Multi-Session Orchestration', zh: '多 Session 编排', ja: 'マルチセッション編排', ko: '멀티 세션 오케스트레이션', fr: 'Orchestration multi-session', de: 'Multi-Session-Orchestrierung', es: 'Orquestación multisesión', pt: 'Orquestração multissessão' }) }}
 
@@ -414,8 +628,8 @@ layout: split-media
 <DeckMiniPanel tone="cyan" :title="{ en: 'Isolated by Design', zh: '隔离即设计', ja: '設計による分離', ko: '설계에 의한 격리', fr: 'Isolé par conception', de: 'Isolation by Design', es: 'Aislado por diseño', pt: 'Isolado por design' }" :body="{ en: 'Write isolated by sessionKey. Read aggregated by taskId. @All summons all; live avatar bar shows who is active.', zh: '写入按 sessionKey 隔离，展示按 taskId 聚合。@All 召集全员，实时头像栏显示谁在活动。', ja: 'sessionKey で書込分離、taskId で読取集約。@All で全員召集、ライブアバターバーで活動者を表示。', ko: 'sessionKey로 쓰기 격리, taskId로 읽기 집계. @All로 전원 소환, 라이브 아바타 바로 활동자 표시.', fr: 'Écriture isolée par sessionKey, lecture agrégée par taskId. @All convoque tous ; barre d’avatars en direct.', de: 'Schreiben isoliert nach sessionKey, Lesen aggregiert nach taskId. @All ruft alle, Live-Avatar-Leiste zeigt Aktivität.', es: 'Escritura aislada por sessionKey, lectura agregada por taskId. @All convoca a todos; barra de avatares en vivo.', pt: 'Escrita isolada por sessionKey, leitura agregada por taskId. @All convoca todos; barra de avatares ao vivo.' }" />
 
 ---
-layout: split-media
----
+
+## layout: split-media
 
 # 📱 {{ $t({ en: 'ClawWork in Your Pocket', zh: 'ClawWork 装进口袋', ja: 'ClawWork をポケットに', ko: '주머니 속의 ClawWork', fr: 'ClawWork dans votre poche', de: 'ClawWork in der Tasche', es: 'ClawWork en tu bolsillo', pt: 'ClawWork no bolso' }) }}
 
@@ -449,8 +663,8 @@ layout: split-media
 </div>
 
 ---
-layout: split-media
----
+
+## layout: split-media
 
 # ⌨️ {{ $t({ en: 'Quick Launch', zh: '快捷启动器', ja: 'クイックランチ', ko: '퀵 런치', fr: 'Quick Launch', de: 'Quick Launch', es: 'Quick Launch', pt: 'Quick Launch' }) }}
 
