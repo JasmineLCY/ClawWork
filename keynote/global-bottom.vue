@@ -35,37 +35,39 @@ onUnmounted(() => window.removeEventListener('keydown', onKey));
 </script>
 
 <template>
-  <div class="theme-anchor">
-    <button class="theme-switch" @click="themeOpen = !themeOpen" :title="currentTheme.label">
-      {{ currentTheme.emoji }}
-    </button>
-    <div v-if="themeOpen" class="theme-menu">
-      <button
-        v-for="t in THEMES"
-        :key="t.id"
-        class="theme-option"
-        :class="{ 'theme-option--active': t.id === theme }"
-        @click="pickTheme(t.id)"
-      >
-        <span class="theme-option-emoji">{{ t.emoji }}</span>
-        <span>{{ t.label }}</span>
+  <div class="controls-hotzone" :class="{ 'controls-hotzone--pinned': open || themeOpen }">
+    <div class="theme-anchor">
+      <button class="theme-switch" @click="themeOpen = !themeOpen" :title="currentTheme.label">
+        {{ currentTheme.emoji }}
       </button>
+      <div v-if="themeOpen" class="theme-menu">
+        <button
+          v-for="t in THEMES"
+          :key="t.id"
+          class="theme-option"
+          :class="{ 'theme-option--active': t.id === theme }"
+          @click="pickTheme(t.id)"
+        >
+          <span class="theme-option-emoji">{{ t.emoji }}</span>
+          <span>{{ t.label }}</span>
+        </button>
+      </div>
     </div>
-  </div>
-  <div class="lang-anchor">
-    <button class="lang-switch" @click="open = !open">
-      {{ LANG_LABELS[lang] }}
-    </button>
-    <div v-if="open" class="lang-menu">
-      <button
-        v-for="l in LANGS"
-        :key="l"
-        class="lang-option"
-        :class="{ 'lang-option--active': l === lang }"
-        @click="pick(l)"
-      >
-        {{ LANG_LABELS[l] }}
+    <div class="lang-anchor">
+      <button class="lang-switch" @click="open = !open">
+        {{ LANG_LABELS[lang] }}
       </button>
+      <div v-if="open" class="lang-menu">
+        <button
+          v-for="l in LANGS"
+          :key="l"
+          class="lang-option"
+          :class="{ 'lang-option--active': l === lang }"
+          @click="pick(l)"
+        >
+          {{ LANG_LABELS[l] }}
+        </button>
+      </div>
     </div>
   </div>
 </template>

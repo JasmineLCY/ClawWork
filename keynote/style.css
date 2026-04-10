@@ -1570,16 +1570,13 @@ html:not(.dark) .slidev-layout {
   align-items: center;
   justify-content: center;
   backdrop-filter: blur(8px);
-  opacity: 0.2;
   transition:
     border-color 0.2s,
-    transform 0.15s,
-    opacity 0.25s;
+    transform 0.15s;
   font-family: system-ui, sans-serif;
 }
 
 .lang-switch:hover {
-  opacity: 1;
   border-color: var(--cw-green);
   background: var(--cw-lang-hover-bg);
   transform: scale(1.1);
@@ -1660,25 +1657,34 @@ html:not(.dark) .slidev-layout {
 
 .slidev-layout {
   font-family: var(--cw-font-base);
+  isolation: isolate;
+}
+
+.slidev-layout::before {
+  content: '';
+  position: absolute;
+  inset: 0;
   background-image: var(--cw-bg-content);
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
+  pointer-events: none;
+  z-index: -1;
 }
 
 .slidev-layout :where(h1, h2, h3, h4) {
   font-family: var(--cw-font-display);
 }
 
-.slidev-layout:has(.cw-split--hero) {
+.slidev-layout:has(.cw-split--hero)::before {
   background-image: var(--cw-bg-cover);
 }
 
-.slidev-layout:has(.cw-thanks-shell):not(:has(.cw-final-links)) {
+.slidev-layout:has(.cw-thanks-shell):not(:has(.cw-final-links))::before {
   background-image: var(--cw-bg-section);
 }
 
-.slidev-layout:has(.cw-final-links) {
+.slidev-layout:has(.cw-final-links)::before {
   background-image: var(--cw-bg-thanks);
 }
 
@@ -1711,16 +1717,13 @@ html:not(.dark) .slidev-layout {
   align-items: center;
   justify-content: center;
   backdrop-filter: blur(8px);
-  opacity: 0.2;
   transition:
     border-color 0.2s,
-    transform 0.15s,
-    opacity 0.25s;
+    transform 0.15s;
   font-family: system-ui, sans-serif;
 }
 
 .theme-switch:hover {
-  opacity: 1;
   border-color: var(--cw-green);
   background: var(--cw-lang-hover-bg);
   transform: scale(1.1);
@@ -1779,4 +1782,27 @@ html:not(.dark) .slidev-layout {
 
 .theme-option-emoji {
   font-size: 14px;
+}
+
+.controls-hotzone {
+  position: fixed;
+  right: 0;
+  bottom: 0;
+  width: 140px;
+  height: 56px;
+  z-index: 9998;
+  transition: opacity 0.3s ease;
+}
+
+@media (hover: hover) {
+  .controls-hotzone {
+    opacity: 0;
+  }
+  .controls-hotzone:hover {
+    opacity: 1;
+  }
+}
+
+.controls-hotzone--pinned {
+  opacity: 1;
 }
